@@ -69,6 +69,7 @@ class ExpandableViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = FAQSectionHeader(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: categoryHeaderHeight))
         header.setupTitle(titleString: categories[section].title)
+        header.currentState = categories[section].isExpanded ? .selected : .normal
         header.tag = section
         header.delegate = self
         return header
@@ -88,10 +89,8 @@ class ExpandableViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func handleExpandClose(section: Int) {
-        // we'll try to close the section first by deleting the rows
         var indexPaths = [IndexPath]()
         for row in categories[section].items.indices {
-            print(0, row)
             let indexPath = IndexPath(row: row, section: section)
             indexPaths.append(indexPath)
         }

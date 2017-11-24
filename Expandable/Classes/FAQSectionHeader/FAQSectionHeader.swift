@@ -45,7 +45,11 @@ class FAQSectionHeader: NibView {
     }
     
     // MARK: - Setup methods
-    func setupUI(withState state: FAQHeaderState = .normal) {
+    func setupTitle(titleString: String) {
+        self.titleLabel.text = titleString
+    }
+    
+    private func setupUI(withState state: FAQHeaderState = .normal) {
         switch state {
         case .normal:
             self.backgroundColor = UIColor.normalFAQSectionColor
@@ -59,11 +63,7 @@ class FAQSectionHeader: NibView {
             })
         }
     }
-    
-    func setupTitle(titleString: String) {
-        self.titleLabel.text = titleString
-    }
-    
+
     // MARK: - Actions
     @IBAction func selectAction(_ sender: UIButton) {
         switch self.currentState {
