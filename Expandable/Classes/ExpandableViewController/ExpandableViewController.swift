@@ -12,10 +12,10 @@ class ExpandableViewController: UIViewController, UITableViewDataSource, UITable
     @IBOutlet weak var tableView: UITableView!
     
     private var categories = [
-        ExpandableCategory(title: "Category 1", items:[ExpandableItem(title:"Question 1 Cat 1", isExpanded: false), ExpandableItem(title:"Question 2 Cat 1", isExpanded: false)], isExpanded: false),
-        ExpandableCategory(title: "Category 2", items:[ExpandableItem(title:"Question 1 Cat 2", isExpanded: false)], isExpanded: false),
-        ExpandableCategory(title: "Category 3", items:[ExpandableItem(title:"Question 1 Cat 3", isExpanded: false)], isExpanded: false),
-        ExpandableCategory( title: "Category 4", items:[ExpandableItem(title:"Question 1 Cat 4",isExpanded: false)], isExpanded: false)
+        ExpandableCategory(title: "Category 1", items:[ExpandableItem(title:"Question 1 Cat 1"), ExpandableItem(title:"Question 2 Cat 1")]),
+        ExpandableCategory(title: "Category 2", items:[ExpandableItem(title:"Question 1 Cat 2")]),
+        ExpandableCategory(title: "Category 3", items:[ExpandableItem(title:"Question 1 Cat 3")]),
+        ExpandableCategory( title: "Category 4", items:[ExpandableItem(title:"Question 1 Cat 4")])
     ]
     
     private let categoryHeaderHeight: CGFloat = 59
@@ -27,6 +27,7 @@ class ExpandableViewController: UIViewController, UITableViewDataSource, UITable
             
             if let header = selectedCategoryHeader, let _ = newValue {
                 categories[header.tag].isExpanded = false
+                self.selectedItemCell = nil
                 self.handleExpandClose(section: header.tag)
             }
         }
@@ -34,11 +35,19 @@ class ExpandableViewController: UIViewController, UITableViewDataSource, UITable
     
     private weak var selectedItemCell : CategoryItemTableViewCell? {
         willSet {
-            selectedItemCell?.currentState = .normal
+            guard let cell = selectedItemCell else {
+                return
+            }
             
-            if let cell = selectedItemCell, let _ = newValue {
-//                categories[header.tag].isExpanded = false
-//                self.handleExpandClose(section: header.tag)
+            guard cell.tag != newValue?.tag else {
+                return
+            }
+            
+            cell.currentState = .normal
+            
+            if let category = selectedCategoryHeader, let _ = newValue {
+                self.categories[category.tag].items[cell.tag].isExpanded = false
+                self.tableView.reloadRows(at: [IndexPath(row: cell.tag, section: category.tag)], with: .none)
             }
         }
     }
@@ -66,8 +75,14 @@ class ExpandableViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CategoryItemTableViewCell
         let item = categories[indexPath.section].items[indexPath.row]
+        cell.tag = indexPath.row
         cell.setupTitle(titleString: item.title)
         cell.currentState = (item.isExpanded == true ? .selected : .normal)
+        
+        if (item.isExpanded == true) {
+            self.selectedItemCell = cell
+        }
+       
         cell.selectionStyle = .none
         return cell
     }
@@ -84,7 +99,7 @@ class ExpandableViewController: UIViewController, UITableViewDataSource, UITable
         let header = FAQSectionHeader(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: categoryHeaderHeight))
         header.setupTitle(titleString: categories[section].title)
         header.currentState = categories[section].isExpanded ? .selected : .normal
-        if (categories[section].isExpanded) {
+        if (categories[section].isExpanded == true) {
             self.selectedCategoryHeader = header
         }
         
@@ -100,12 +115,12 @@ class ExpandableViewController: UIViewController, UITableViewDataSource, UITable
         let cell = tableView.cellForRow(at: indexPath) as! CategoryItemTableViewCell
         if cell.currentState == .selected {
             item.isExpanded = false
+            self.selectedItemCell = nil
         } else {
             item.isExpanded = true
+            self.selectedItemCell = cell
         }
-        
-        self.categories[indexPath.section].items[indexPath.row] = item
-        
+
         tableView.reloadRows(at: [indexPath], with: .none)
     }
     
@@ -117,6 +132,7 @@ class ExpandableViewController: UIViewController, UITableViewDataSource, UITable
         } else {
             self.selectedCategoryHeader = nil
             categories[header.tag].isExpanded = false
+            self.selectedItemCell = nil
         }
         
         self.handleExpandClose(section: header.tag)

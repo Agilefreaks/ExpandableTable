@@ -8,20 +8,32 @@
 
 import Foundation
 
-struct ExpandableCategory {
+class ExpandableCategory {
     let title: String
     var items: [ExpandableItem]
     var isExpanded: Bool {
         didSet {
             if isExpanded == false {
-                let newItems = items.map({ExpandableItem(title: $0.title, isExpanded: false)})
-                items = newItems
+                items.forEach({ (item) in
+                    item.isExpanded = false
+                })
             }
         }
     }
+    
+    init(title: String, items: [ExpandableItem], isExpanded: Bool = false) {
+        self.title = title
+        self.items = items
+        self.isExpanded = isExpanded
+    }
 }
 
-struct ExpandableItem {
+class ExpandableItem {
     let title: String
     var isExpanded: Bool
+    
+    init(title: String, isExpanded: Bool = false) {
+        self.title = title
+        self.isExpanded = isExpanded
+    }
 }
