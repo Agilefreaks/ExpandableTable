@@ -35,8 +35,8 @@ class ExpandableViewController: UIViewController, UITableViewDataSource, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "FAQ"
-        
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+    
+        tableView.register(UINib(nibName:"CategoryItemTableViewCell", bundle: nil), forCellReuseIdentifier: cellId)
     }
     
     // MARK - UITableViewDataSource methods
@@ -53,8 +53,8 @@ class ExpandableViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-        cell.textLabel?.text = categories[indexPath.section].items[indexPath.row].title
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CategoryItemTableViewCell
+        cell.titleLabel.text = categories[indexPath.section].items[indexPath.row].title
         return cell
     }
     
@@ -70,6 +70,10 @@ class ExpandableViewController: UIViewController, UITableViewDataSource, UITable
         let header = FAQSectionHeader(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: categoryHeaderHeight))
         header.setupTitle(titleString: categories[section].title)
         header.currentState = categories[section].isExpanded ? .selected : .normal
+        if (categories[section].isExpanded) {
+            self.selectedCategoryHeader = header
+        }
+        
         header.tag = section
         header.delegate = self
         return header

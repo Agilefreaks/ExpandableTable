@@ -17,6 +17,8 @@
 		AE572DC61FC7359500D0722F /* NibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE572DC41FC7359500D0722F /* NibView.swift */; };
 		AE572DC71FC7359500D0722F /* UIView+XibExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE572DC51FC7359500D0722F /* UIView+XibExtension.swift */; };
 		AECB02981FC8123C0035D350 /* ExpandableCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECB02971FC8123C0035D350 /* ExpandableCategory.swift */; };
+		AECB029C1FC81D040035D350 /* CategoryItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECB029A1FC81D040035D350 /* CategoryItemTableViewCell.swift */; };
+		AECB029D1FC81D040035D350 /* CategoryItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AECB029B1FC81D040035D350 /* CategoryItemTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		AE572DC41FC7359500D0722F /* NibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibView.swift; sourceTree = "<group>"; };
 		AE572DC51FC7359500D0722F /* UIView+XibExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+XibExtension.swift"; sourceTree = "<group>"; };
 		AECB02971FC8123C0035D350 /* ExpandableCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableCategory.swift; sourceTree = "<group>"; };
+		AECB029A1FC81D040035D350 /* CategoryItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryItemTableViewCell.swift; sourceTree = "<group>"; };
+		AECB029B1FC81D040035D350 /* CategoryItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryItemTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +88,7 @@
 		AE572DB71FC71E0D00D0722F /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				AECB02991FC81CDC0035D350 /* CategoryItemTableViewCell */,
 				AE572DC11FC7353300D0722F /* ExpandableViewController */,
 				AE572DBF1FC734E100D0722F /* FAQSectionHeader */,
 				AE572DC01FC7351900D0722F /* AppDelegate */,
@@ -125,6 +130,15 @@
 				AE572DA41FC70C9600D0722F /* ExpandableViewController.swift */,
 			);
 			path = ExpandableViewController;
+			sourceTree = "<group>";
+		};
+		AECB02991FC81CDC0035D350 /* CategoryItemTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				AECB029A1FC81D040035D350 /* CategoryItemTableViewCell.swift */,
+				AECB029B1FC81D040035D350 /* CategoryItemTableViewCell.xib */,
+			);
+			path = CategoryItemTableViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,6 +203,7 @@
 				AE572DAD1FC70C9600D0722F /* LaunchScreen.storyboard in Resources */,
 				AE572DAA1FC70C9600D0722F /* Assets.xcassets in Resources */,
 				AE572DA81FC70C9600D0722F /* Main.storyboard in Resources */,
+				AECB029D1FC81D040035D350 /* CategoryItemTableViewCell.xib in Resources */,
 				AE572DBD1FC71E6300D0722F /* FAQSectionHeader.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -202,6 +217,7 @@
 			files = (
 				AE572DA51FC70C9600D0722F /* ExpandableViewController.swift in Sources */,
 				AECB02981FC8123C0035D350 /* ExpandableCategory.swift in Sources */,
+				AECB029C1FC81D040035D350 /* CategoryItemTableViewCell.swift in Sources */,
 				AE572DC71FC7359500D0722F /* UIView+XibExtension.swift in Sources */,
 				AE572DC61FC7359500D0722F /* NibView.swift in Sources */,
 				AE572DB51FC71DDC00D0722F /* FAQSectionHeader.swift in Sources */,
