@@ -12,10 +12,10 @@ class ExpandableViewController: UIViewController, UITableViewDataSource, UITable
     @IBOutlet weak var tableView: UITableView!
     
     private var categories = [
-        ExpandableCategory(isExpanded: false, title: "Category 1", items:[ExpandableItem(title:"Question 1 Cat 1"), ExpandableItem(title:"Question 2 Cat 1")]),
-        ExpandableCategory(isExpanded: false, title: "Category 2", items:[ExpandableItem(title:"Question 1 Cat 2")]),
-        ExpandableCategory(isExpanded: false, title: "Category 3", items:[ExpandableItem(title:"Question 1 Cat 3")]),
-        ExpandableCategory(isExpanded: false, title: "Category 4", items:[ExpandableItem(title:"Question 1 Cat 4")])
+        ExpandableCategory(title: "Category 1", items:[ExpandableItem(title:"Question 1 Cat 1", isExpanded: false), ExpandableItem(title:"Question 2 Cat 1", isExpanded: false)], isExpanded: false),
+        ExpandableCategory(title: "Category 2", items:[ExpandableItem(title:"Question 1 Cat 2", isExpanded: false)], isExpanded: false),
+        ExpandableCategory(title: "Category 3", items:[ExpandableItem(title:"Question 1 Cat 3", isExpanded: false)], isExpanded: false),
+        ExpandableCategory( title: "Category 4", items:[ExpandableItem(title:"Question 1 Cat 4",isExpanded: false)], isExpanded: false)
     ]
     
     private let categoryHeaderHeight: CGFloat = 59
@@ -28,6 +28,17 @@ class ExpandableViewController: UIViewController, UITableViewDataSource, UITable
             if let header = selectedCategoryHeader, let _ = newValue {
                 categories[header.tag].isExpanded = false
                 self.handleExpandClose(section: header.tag)
+            }
+        }
+    }
+    
+    private weak var selectedItemCell : CategoryItemTableViewCell? {
+        willSet {
+            selectedItemCell?.currentState = .normal
+            
+            if let cell = selectedItemCell, let _ = newValue {
+//                categories[header.tag].isExpanded = false
+//                self.handleExpandClose(section: header.tag)
             }
         }
     }
@@ -54,7 +65,10 @@ class ExpandableViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CategoryItemTableViewCell
-        cell.titleLabel.text = categories[indexPath.section].items[indexPath.row].title
+        let item = categories[indexPath.section].items[indexPath.row]
+        cell.setupTitle(titleString: item.title)
+        cell.currentState = (item.isExpanded == true ? .selected : .normal)
+        cell.selectionStyle = .none
         return cell
     }
     
@@ -77,6 +91,22 @@ class ExpandableViewController: UIViewController, UITableViewDataSource, UITable
         header.tag = section
         header.delegate = self
         return header
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var item = self.categories[indexPath.section].items[indexPath.row]
+        
+        let cell = tableView.cellForRow(at: indexPath) as! CategoryItemTableViewCell
+        if cell.currentState == .selected {
+            item.isExpanded = false
+        } else {
+            item.isExpanded = true
+        }
+        
+        self.categories[indexPath.section].items[indexPath.row] = item
+        
+        tableView.reloadRows(at: [indexPath], with: .none)
     }
     
     // MARK: - FAQSectionHeaderDelegate
@@ -106,4 +136,3 @@ class ExpandableViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
 }
-

@@ -9,11 +9,19 @@
 import Foundation
 
 struct ExpandableCategory {
-    var isExpanded: Bool
-    var title: String
-    let items: [ExpandableItem]
+    let title: String
+    var items: [ExpandableItem]
+    var isExpanded: Bool {
+        didSet {
+            if isExpanded == false {
+                let newItems = items.map({ExpandableItem(title: $0.title, isExpanded: false)})
+                items = newItems
+            }
+        }
+    }
 }
 
 struct ExpandableItem {
-    var title: String
+    let title: String
+    var isExpanded: Bool
 }
