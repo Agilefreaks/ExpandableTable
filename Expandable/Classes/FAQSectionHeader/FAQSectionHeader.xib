@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FAQSectionHeader" customModule="Expandable" customModuleProvider="target">
+            <connections>
+                <outlet property="arrowImageView" destination="gkk-cS-E0X" id="574-1l-KCv"/>
+                <outlet property="titleLabel" destination="QsI-CY-73r" id="Slh-jY-Oi2"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="72"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QsI-CY-73r">
+                    <rect key="frame" x="16" y="25.5" width="86" height="21"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p4N-xQ-S3J">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="72"/>
+                    <connections>
+                        <action selector="selectAction:" destination="-1" eventType="touchUpInside" id="2Db-id-a1F"/>
+                    </connections>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="caret" translatesAutoresizingMaskIntoConstraints="NO" id="gkk-cS-E0X">
+                    <rect key="frame" x="342" y="31.5" width="15" height="9"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="15" id="ari-ME-Xyf"/>
+                        <constraint firstAttribute="height" constant="9" id="j62-pR-Exc"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="QsI-CY-73r" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="6hD-FI-tCc"/>
+                <constraint firstItem="gkk-cS-E0X" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="BX5-AZ-piE"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="gkk-cS-E0X" secondAttribute="trailing" constant="18" id="P4r-iy-clb"/>
+                <constraint firstItem="p4N-xQ-S3J" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="S8P-0P-7zk"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="QsI-CY-73r" secondAttribute="trailing" constant="34" id="aP5-rD-SC7"/>
+                <constraint firstItem="p4N-xQ-S3J" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="kP9-1R-17r"/>
+                <constraint firstItem="p4N-xQ-S3J" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="l4D-Cn-C50"/>
+                <constraint firstItem="QsI-CY-73r" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="oxY-et-AzW"/>
+                <constraint firstItem="p4N-xQ-S3J" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="zQl-XY-jGA"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-5.5" y="-270"/>
+        </view>
+        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ax1-Dv-YuF">
+            <rect key="frame" x="0.0" y="0.0" width="46" height="59"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <state key="normal" title="Button"/>
+            <point key="canvasLocation" x="-170" y="-175"/>
+        </button>
+    </objects>
+    <resources>
+        <image name="caret" width="15" height="9"/>
+    </resources>
+</document>
